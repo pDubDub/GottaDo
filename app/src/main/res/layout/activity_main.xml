@@ -40,6 +40,8 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+    <!-- This layout_behvaior line shows as an error in my AStudio, but it is auto-generated template code, and it runs fine -->
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
