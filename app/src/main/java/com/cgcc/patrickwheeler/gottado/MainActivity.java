@@ -1,3 +1,9 @@
+// GottaDo - Final Project App for CIS165DA Android Level I
+// CGCC - Spring 2019
+// authors Tanner Kay & Patrick Wheeler
+
+// Main Activity creates the intial tab layout and the Add button at the bottom of the screen.
+
 package com.cgcc.patrickwheeler.gottado;
 
 import android.os.Bundle;
