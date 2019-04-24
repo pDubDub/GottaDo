@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- This is the layout xml used for the top portion of the screen -->
+
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -27,7 +30,8 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary" />
+            android:background="?attr/colorPrimary"
+            />
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager

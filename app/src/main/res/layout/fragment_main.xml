@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- This is the layout xml for the fragment used for the bottom portion of the screen -->
+<!-- Eventually, we will need a second fragment for the Events page, and add a switch in the java file to use associate each fragment with each tab -->
+
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
