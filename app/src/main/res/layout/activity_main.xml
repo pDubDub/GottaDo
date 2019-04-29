@@ -40,7 +40,16 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+
     <!-- This layout_behvaior line shows as an error in my AStudio, but it is auto-generated template code, and it runs fine -->
+
+    <!-- https://developer.android.com/guide/navigation/navigation-swipe-view -->
+    <!-- <androidx.viewpager.widget.ViewPager
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/> -->
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
