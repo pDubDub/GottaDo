@@ -8,6 +8,7 @@
 package com.cgcc.patrickwheeler.gottado;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.design.widget.FloatingActionButton;
@@ -28,6 +29,13 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    // TODO need to implement Local Storage to load/save ArrayList
+    //          ArrayList to Local Storage
+    //          - Load when opening/launching
+    //          - if !exists then create sampleData
+    //          - Save on all edits
+    //  see SQLite DB powerpoint
+    // TODO may need SavePreferences in order to save in-progress actions during onPause and onResume
 
 
     @Override
@@ -52,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                //TODO create an Intent that launches a new Activity page, where user can create a new Task
+                startActivity(new Intent(getApplicationContext(), AddTaskActivity.class));
             }
         });
 
