@@ -3,8 +3,20 @@ package com.cgcc.patrickwheeler.gottado;
 import java.util.ArrayList;
 
 public class TaskEvent {
+
+    // fields, properties, whatever you wanna call 'em
     private String mTaskEventName;
     private boolean mIsCompleted;
+    private boolean doItToday;
+    // startDate
+    // startTime
+    // deadline
+    // duration
+    // reminderTime
+    // reminderLocation
+    // UniqueID             ??
+    // SortOrder#
+    // do we need an IsEvent boolean, to distinguish calendar events from tasks? (both are TaskEvent objects)
 
     public TaskEvent(String taskEventName, boolean isComplete) {
         mTaskEventName = taskEventName;
@@ -31,4 +43,10 @@ public class TaskEvent {
 
         return taskEvents;
     }
+
+    /* TODO: 2019-05-01
+    *   I guess next would be to make the data save/persist (whether that's SQLite, I don't know)
+    *       and then only run the above createTaskEventList() if it doesn't exist to be loaded.
+    * */
+
 }
