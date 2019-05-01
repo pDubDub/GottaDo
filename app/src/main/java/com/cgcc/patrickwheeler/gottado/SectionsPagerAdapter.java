@@ -34,9 +34,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 //      mContext = context;
     }
 
+    // getItem is called to instantiate the fragment for the given page.
     @Override
     public Fragment getItem(int position) {
-        // getItem is called to instantiate the fragment for the given page.
 
         switch (position) {
             case 0:
@@ -49,12 +49,14 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         return null;
     }
 
+    // getCount method establishes the number of tabs in the Tabbed Activity
     @Override
     public int getCount() {
         // Show 2 total pages.
         return 2;
     }
 
+    // getPageTitle method provides the text for the tabs
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
