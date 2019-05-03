@@ -7,12 +7,15 @@ public class TaskEvent {
     // fields, properties, whatever you wanna call 'em
     private String mTaskEventName;
     private boolean mIsCompleted;
-    private boolean doItToday;
+    public boolean doItToday;
     // startDate
     // startTime
+    public boolean doesRepeat;
     // deadline
     // duration
+    public boolean hasTimeReminder;
     // reminderTime
+    public boolean hasMapReminder;
     // reminderLocation
     // UniqueID             ??
     // SortOrder#
@@ -21,6 +24,10 @@ public class TaskEvent {
     public TaskEvent(String taskEventName, boolean isComplete) {
         mTaskEventName = taskEventName;
         mIsCompleted = isComplete;
+        doItToday = false;
+        doesRepeat = false;
+        hasTimeReminder = false;
+        hasMapReminder = false;
     }
 
     public String getTaskEventName() {
@@ -30,6 +37,7 @@ public class TaskEvent {
     public boolean isComplete() {
         return mIsCompleted;
     }
+    public void setComplete(Boolean value) { mIsCompleted = value; }
 
     private static int taskEventID = 0;
 
@@ -37,7 +45,7 @@ public class TaskEvent {
         ArrayList<TaskEvent> taskEvents = new ArrayList<TaskEvent>();
 
         for (int i = 1; i <= numTaskEvents; i++) {
-            taskEvents.add(new TaskEvent("TaskEvent " + ++taskEventID, i <= numTaskEvents / 2));
+            taskEvents.add(new TaskEvent("TaskEvent " + ++taskEventID, false));
             // above line sets first half of taskEvents boolean differently
         }
 
