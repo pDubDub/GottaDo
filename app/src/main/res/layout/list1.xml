@@ -5,6 +5,11 @@
     android:layout_height="match_parent">
 
 
+    <!-- This is a placeholder line, for Day and Time.
+        But I think I might just like the Day appended to app title.
+        Time is already in the upper Right corner.
+    -->
+
     <TextView
         android:id="@+id/tempDateTextView"
         android:layout_width="match_parent"

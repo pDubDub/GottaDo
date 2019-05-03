@@ -35,12 +35,45 @@
         android:paddingRight="16dp"
         android:layout_weight="1" />
 
-    <TextView
-        android:id="@+id/textView"
+    <ImageView
+        android:id="@+id/timeImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:paddingRight="16dp"
-        android:text=">" />
+        app:srcCompat="@drawable/time_icon_off"
+        android:contentDescription="Time Notification Icon" />
+
+    <ImageView
+        android:id="@+id/mapImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        app:srcCompat="@drawable/map_icon_off"
+        android:contentDescription="Map Notification Icon" />
+
+    <ImageView
+        android:id="@+id/repeatImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        app:srcCompat="@drawable/repeat_icon_off"
+        android:contentDescription="Repeating Task Icon" />
+
+    <ImageView
+        android:id="@+id/todayImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        app:srcCompat="@drawable/today_icon_off"
+        android:contentDescription="Today Task Icon" />
+
+    <ImageView
+        android:id="@+id/editImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        app:srcCompat="@drawable/edit_icon"
+        android:contentDescription="Edit Button Icon" />
+
 
 </LinearLayout>

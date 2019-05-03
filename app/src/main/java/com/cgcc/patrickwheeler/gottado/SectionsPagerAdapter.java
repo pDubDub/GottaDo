@@ -64,7 +64,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return "All To-Do's";
             case 1:
-                return "Daily Planner";
+                return "Scheduler";
         }
         return null;
     }
