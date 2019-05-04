@@ -7,32 +7,79 @@
     tools:context=".AddTaskActivity">
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="This activity allows you to add a new item to the list"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="53dp"
+        android:text="This activity allows you to add a new item to the list, or edit an existing task."
+        app:layout_constraintBottom_toBottomOf="@+id/editText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button"
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="9dp"
+        android:text="Users can also define time-based and geo-location based reminders."
+        app:layout_constraintBottom_toTopOf="@+id/switch1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="21dp"
-        android:text="Save"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintStart_toStartOf="@+id/button2" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="97dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="61dp"
+        android:text="Does Repeat "
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
+
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="148dp"
-        android:layout_marginBottom="37dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="56dp"
+        android:text="Save"
+        app:layout_constraintStart_toEndOf="@+id/cancelButton"
+        app:layout_constraintTop_toBottomOf="@+id/switch1" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="94dp"
         android:text="@android:string/cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/saveButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
 </android.support.constraint.ConstraintLayout>

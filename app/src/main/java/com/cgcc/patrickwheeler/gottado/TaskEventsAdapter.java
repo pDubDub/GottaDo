@@ -1,6 +1,7 @@
 package com.cgcc.patrickwheeler.gottado;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
@@ -67,7 +68,8 @@ public class TaskEventsAdapter extends RecyclerView.Adapter<TaskEventsAdapter.Vi
             if (position != RecyclerView.NO_POSITION) {
                 TaskEvent thisTaskEvent = mTaskEvents.get(position);
 
-                // TODO this needs better logic. Should really dim all icon buttons too when checked, and vice versa.
+                // TODO this needs better logic. Should really dim all icon buttons too when checked,
+                //      and un-dim only the true ones when unchecked.
                 if (view == checkBox) {
                     if(thisTaskEvent.isComplete()) {
                         thisTaskEvent.setComplete(false);
@@ -109,6 +111,15 @@ public class TaskEventsAdapter extends RecyclerView.Adapter<TaskEventsAdapter.Vi
                         thisTaskEvent.doItToday = true;
                         todayImageView.setImageResource(R.drawable.today_icon_on);
                     }
+                } else if (view == editImageView) {
+
+                    // launch AddTaskActivity here
+
+
+                    // not sure how to do it. The following code does not compile:
+//                    Intent intent = new Intent(view.getContext(), StartActivity.AddTaskActivity);
+//                    view.getContext().startActivity(intent);
+//                    MainActivity.startActivity(new Intent(MainActivity.getApplicationContext(), AddTaskActivity.class));
                 }
 
             }
