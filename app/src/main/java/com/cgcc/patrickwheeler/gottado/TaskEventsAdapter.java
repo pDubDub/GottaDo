@@ -20,6 +20,7 @@ import java.util.List;
 
 // Create the basic adapter extending from RecyclerView.Adapter
 // Note that we specify the custom ViewHolder which gives us access to our views
+
 public class TaskEventsAdapter extends RecyclerView.Adapter<TaskEventsAdapter.ViewHolder> {
 
     // Provide a direct reference to each of the views within a data item

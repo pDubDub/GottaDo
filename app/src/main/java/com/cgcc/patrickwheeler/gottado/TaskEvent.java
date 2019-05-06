@@ -21,9 +21,9 @@ public class TaskEvent {
     // SortOrder#
     // do we need an IsEvent boolean, to distinguish calendar events from tasks? (both are TaskEvent objects)
 
-    public TaskEvent(String taskEventName, boolean isComplete) {
+    public TaskEvent(String taskEventName) {
         mTaskEventName = taskEventName;
-        mIsCompleted = isComplete;
+        mIsCompleted = false;
         doItToday = false;
         doesRepeat = false;
         hasTimeReminder = false;
@@ -52,7 +52,7 @@ public class TaskEvent {
 
         for (int i = 1; i <= numTaskEvents; i++) {
 
-            taskEvents.add(new TaskEvent(nameArray[i-1], false));
+            taskEvents.add(new TaskEvent(nameArray[i-1]));
             // above line sets first half of taskEvents boolean differently
         }
 

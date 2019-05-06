@@ -23,7 +23,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     //  see SQLite DB powerpoint
     // TODO may need SavePreferences in order to save in-progress actions during onPause and onResume
 
+    // the main ArrayList of TaskEvents
+    static ArrayList<TaskEvent> taskEvents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +71,57 @@ public class MainActivity extends AppCompatActivity {
 
                 //TODO create an Intent that launches a new Activity page, where user can create a new Task
                 startActivity(new Intent(getApplicationContext(), AddTaskActivity.class));
+
             }
         });
 
+        // calls the static class method to create and populate the demonstration taskEvents list
+        taskEvents = TaskEvent.createTaskEventList(8);
 
+        loadData();
 
     }
 
+    // this method should allow any fragment or secondary activity to set the ArrayList
+    public static void setTaskEvents(ArrayList<TaskEvent> taskEvents) {
+        taskEvents = taskEvents;
+    }
 
+    // this method should allow any fragment or secondary activity to get the ArrayList
+    public static ArrayList<TaskEvent> getTaskEvents() {
+        return taskEvents;
+    }
+
+    public void saveData() {
+        // writing data to internal storage
+        // this code taken from class PowerPoint
+        try {
+            FileOutputStream fileOutputStream = openFileOutput("DemoFile", Context.MODE_PRIVATE);
+            fileOutputStream.write("This is Data that is stored in the internal storage".getBytes());
+            fileOutputStream.flush();
+            fileOutputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadData() {
+        // reading data from a file
+        // this code taken from class PowerPoint
+        try {
+            int ch;
+            StringBuilder builder = new StringBuilder();
+            FileInputStream fileInputStream = openFileInput("DemoFile");
+            while ((ch = fileInputStream.read()) != -1) {
+                builder.append((char) ch);
+            }
+            Toast.makeText(getApplicationContext(), ""+ch, Toast.LENGTH_LONG).show();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
