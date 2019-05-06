@@ -41,11 +41,18 @@ public class TaskEvent {
 
     private static int taskEventID = 0;
 
+    // this static method creates a TaskEventList, called by Tab1.java
     public static ArrayList<TaskEvent> createTaskEventList(int numTaskEvents) {
         ArrayList<TaskEvent> taskEvents = new ArrayList<TaskEvent>();
 
+        // array to populate the created TaskEventList with actual task titles
+        String[] nameArray = {"Feed Cat", "Turn in Final Project", "Visit Advisor",
+                "Drop off mail", "Buy Cat Food", "Get Milk",
+                "Call Mom", "Pay Phone Bill"};
+
         for (int i = 1; i <= numTaskEvents; i++) {
-            taskEvents.add(new TaskEvent("TaskEvent " + ++taskEventID, false));
+
+            taskEvents.add(new TaskEvent(nameArray[i-1], false));
             // above line sets first half of taskEvents boolean differently
         }
 
