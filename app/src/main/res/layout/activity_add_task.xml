@@ -6,34 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".AddTaskActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="41dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="41dp"
-        android:layout_marginBottom="12dp"
-        android:text="This activity allows you to add a new item to the list, or edit an existing task."
-        app:layout_constraintBottom_toTopOf="@+id/nameInputEditText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="41dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="41dp"
-        android:layout_marginBottom="11dp"
-        android:text="Users can also define time-based and geo-location based reminders."
-        app:layout_constraintBottom_toTopOf="@+id/switch1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameInputEditText" />
-
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
@@ -41,47 +13,229 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="20dp" />
 
+    <android.support.constraint.Guideline
+        android:id="@+id/centerGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:text="@string/addView_text_1"
+        app:layout_constraintEnd_toStartOf="@+id/centerGuideline"
+        app:layout_constraintStart_toStartOf="@+id/centerGuideline"
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
+
     <EditText
         android:id="@+id/nameInputEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="89dp"
-        android:layout_marginBottom="87dp"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
         android:ems="10"
+        android:hint="@string/addView_input_hint"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintBottom_toBottomOf="@+id/switch1"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        app:layout_constraintEnd_toEndOf="@+id/todaySwitch"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toEndOf="@+id/todaySwitch"
+        app:layout_constraintTop_toBottomOf="@+id/textView1"
+        tools:targetApi="o" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="210dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:text="@string/addView_text2"
+        app:layout_constraintEnd_toEndOf="@+id/geoSwitch"
+        app:layout_constraintStart_toEndOf="@+id/geoSwitch"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/todaySwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="194dp"
-        android:text="Does Repeat "
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:switchPadding="8dp"
+        android:text="@string/addView_todaySwtichLabel"
+        app:layout_constraintBottom_toTopOf="@+id/repeatSwitch"
+        app:layout_constraintEnd_toStartOf="@+id/centerGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/nameInputEditText" />
 
+    <ImageView
+        android:id="@+id/todayImageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_weight="0"
+        android:contentDescription="Today Task Icon"
+        app:layout_constraintBottom_toTopOf="@+id/repeatImageView2"
+        app:layout_constraintStart_toEndOf="@+id/todaySwitch"
+        app:layout_constraintTop_toBottomOf="@+id/nameInputEditText"
+        app:srcCompat="@drawable/today_icon_off" />
+
+    <Switch
+        android:id="@+id/repeatSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:switchPadding="8dp"
+        android:text="@string/addView_repeatSwitchLabel"
+        app:layout_constraintBottom_toTopOf="@+id/timeSwitch"
+        app:layout_constraintEnd_toStartOf="@+id/centerGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/todaySwitch" />
+
+    <ImageView
+        android:id="@+id/repeatImageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:contentDescription="Repeating Task Icon"
+        app:layout_constraintBottom_toTopOf="@+id/timeImageView2"
+        app:layout_constraintStart_toStartOf="@+id/todayImageView2"
+        app:layout_constraintTop_toBottomOf="@+id/todayImageView2"
+        app:srcCompat="@drawable/repeat_icon_off" />
+
+    <Switch
+        android:id="@+id/timeSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:switchPadding="8dp"
+        android:text="@string/addView_timeSwitchLabel"
+        app:layout_constraintBottom_toTopOf="@+id/geoSwitch"
+        app:layout_constraintEnd_toStartOf="@+id/centerGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/repeatSwitch" />
+
+
+    <ImageView
+        android:id="@+id/timeImageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:contentDescription="Time Notification Icon"
+        app:layout_constraintBottom_toTopOf="@+id/mapImageView2"
+        app:layout_constraintStart_toStartOf="@+id/repeatImageView2"
+        app:layout_constraintTop_toBottomOf="@+id/repeatImageView2"
+        app:srcCompat="@drawable/time_icon_off" />
+
+    <Switch
+        android:id="@+id/geoSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:switchPadding="8dp"
+        android:text="@string/addView_mapSwitchLabel"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toStartOf="@+id/centerGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/timeSwitch" />
+
+    <ImageView
+        android:id="@+id/mapImageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:contentDescription="Map Notification Icon"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="@+id/timeImageView2"
+        app:layout_constraintTop_toBottomOf="@+id/timeImageView2"
+        app:srcCompat="@drawable/map_icon_off" />
 
     <Button
-        android:id="@+id/saveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
-        android:layout_marginEnd="56dp"
-        android:text="Save"
-        app:layout_constraintEnd_toEndOf="@+id/switch1"
-        app:layout_constraintTop_toBottomOf="@+id/switch1" />
+        android:id="@+id/timeSampleButton"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="63dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="62dp"
+        android:onClick="TimeSampleAlert"
+        android:text="Show Sample Time Reminder"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/cancelButton"
+        app:layout_constraintEnd_toStartOf="@+id/geoSampleButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/geoSwitch" />
+
+    <Button
+        android:id="@+id/geoSampleButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="15dp"
+        android:lines="2"
+        android:onClick="MapSampleAlert"
+        android:text="Show Sample Geo-Fenced Reminder"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/timeSampleButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/timeSampleButton"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.0" />/>
 
     <Button
         android:id="@+id/cancelButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="44dp"
         android:text="@android:string/cancel"
-        app:layout_constraintBaseline_toBaselineOf="@+id/saveButton"
-        app:layout_constraintEnd_toStartOf="@+id/saveButton" />
+        app:layout_constraintEnd_toEndOf="@+id/timeSampleButton"
+        app:layout_constraintTop_toTopOf="@+id/saveButton" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="@string/addView_saveButtonLabel"
+        app:layout_constraintStart_toStartOf="@+id/geoSampleButton"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Button
+        android:id="@+id/setButton1"
+        android:layout_width="45dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:clickable="false"
+        android:enabled="false"
+        android:includeFontPadding="false"
+        android:text="SET"
+        android:textSize="8sp"
+        app:layout_constraintStart_toEndOf="@+id/repeatImageView2"
+        app:layout_constraintTop_toTopOf="@+id/repeatImageView2"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/setButton2"
+        android:layout_width="45dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:clickable="false"
+        android:enabled="false"
+        android:includeFontPadding="false"
+        android:text="SET"
+        android:textSize="8sp"
+        app:layout_constraintStart_toEndOf="@+id/timeImageView2"
+        app:layout_constraintTop_toTopOf="@+id/timeImageView2"
+        tools:layout_editor_absoluteY="153dp" />
+
+    <Button
+        android:id="@+id/setButton3"
+        android:layout_width="45dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:clickable="false"
+        android:enabled="false"
+        android:includeFontPadding="false"
+        android:text="SET"
+        android:textSize="8sp"
+        app:layout_constraintStart_toEndOf="@+id/mapImageView2"
+        app:layout_constraintTop_toTopOf="@+id/mapImageView2"
+        tools:layout_editor_absoluteY="179dp" />
 
 
 </android.support.constraint.ConstraintLayout>

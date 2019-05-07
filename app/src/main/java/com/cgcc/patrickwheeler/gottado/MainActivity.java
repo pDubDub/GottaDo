@@ -18,7 +18,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -28,7 +31,11 @@ import java.io.IOException;
 import java.lang.Object;
 import java.lang.String;
 
+import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,10 +50,15 @@ public class MainActivity extends AppCompatActivity {
     // the main ArrayList of TaskEvents, should be easily accessible to sub fragments
     static ArrayList<TaskEvent> taskEvents;
 
+    String weekDay;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        TextView titleTextView = (TextView) findViewById(R.id.title);
 
         FragmentManager fm = getSupportFragmentManager();
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(fm);
@@ -90,6 +102,14 @@ public class MainActivity extends AppCompatActivity {
 //        if (taskEvents.size() < 1) {
 //            taskEvents = TaskEvent.createDemoTaskEventList(8);          // don't set higher than 8
 //        }
+
+        // saveData();             // testing to see if this refreshes the list-1 after adding a new Task - DIDNT WORK
+
+        // gets current day and adds it to the Title on the Main UI
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
+        Calendar calendar = Calendar.getInstance();
+        weekDay = dayFormat.format(calendar.getTime());
+        titleTextView.setText("GottaDo            ..." + weekDay + "!");
     }
 
     @Override
