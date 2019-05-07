@@ -3,5 +3,6 @@ Task-management app; CIS165DA Final Project
 CIS165DA Android Level I - Chandler/Gilbert Community College - Spring 2019
 
 Authors:
+  Patrick Wheeler,
   Tanner Kay
-  Patrick Wheeler
+
