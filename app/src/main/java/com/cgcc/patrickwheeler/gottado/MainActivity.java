@@ -11,18 +11,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.FileInputStream;
@@ -31,14 +25,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     // TODO need to implement Local Storage to load/save ArrayList
     //          ArrayList to Local Storage
     //          - Load when opening/launching
-    //          - if !exists then create sampleData
+    //          - if does not exists then create sampleData
     //          - Save on all edits
     //  see SQLite DB powerpoint
     // TODO may need SavePreferences in order to save in-progress actions during onPause and onResume
@@ -69,17 +62,22 @@ public class MainActivity extends AppCompatActivity {
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
 
-                //TODO create an Intent that launches a new Activity page, where user can create a new Task
+                // launches a new Activity page, where user can create a new Task
                 startActivity(new Intent(getApplicationContext(), AddTaskActivity.class));
 
             }
         });
 
-        // calls the static class method to create and populate the demonstration taskEvents list
-        taskEvents = TaskEvent.createTaskEventList(8);
-
+        // I think we need to loadData here...
         loadData();
 
+        taskEvents = TaskEvent.createDemoTaskEventList(8); // TODO DELETE THIS LINE ONCE SAVE/LOAD WORK
+
+        // and then if-and-only-if ArrayList.size() == 0 after loading data, then create demoData
+        // calls the static class method to create and populate the demonstration taskEvents list
+        if (taskEvents.size() < 1) {
+            taskEvents = TaskEvent.createDemoTaskEventList(8);
+        }
     }
 
     // this method should allow any fragment or secondary activity to set the ArrayList
@@ -105,6 +103,11 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        // TODO should modify the above code, to tokenize taskEvents and write to file
+        int i = taskEvents.size();              // just a line to prove to myself that this method has access to taskEvents
+
+        // TODO once working, saveData() should be called at all of the onPause, etc events
     }
 
     public void loadData() {
@@ -123,5 +126,12 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
+        // taskEvents = TaskEvent.createDemoTaskEventList(1); // TEMP LINE until loadData() works
+
+        // TODO once saveData method works, should modify this code to empty ArrayList, read file, de-tokenize, create taskEvents, and add to ArrayList
+
+        // TODO once working, loadData() should be called at onCreate, onResume, etc ????
     }
 }

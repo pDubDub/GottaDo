@@ -51,6 +51,8 @@ public class AddTaskActivity extends AppCompatActivity {
                 MainActivity.setTaskEvents(localTaskEvents);
 
                 // BEST I CAN TELL, this works, but I can't figure out how to update the RecyclerView yet
+                //      I think there's an "Adapter".notifyDataSetChanged(); method to be called, but I have no idea where
+
 
                 finish();
             }

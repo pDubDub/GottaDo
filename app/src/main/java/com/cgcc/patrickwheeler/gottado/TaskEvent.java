@@ -41,8 +41,9 @@ public class TaskEvent {
 
     private static int taskEventID = 0;
 
-    // this static method creates a TaskEventList, called by Tab1.java
-    public static ArrayList<TaskEvent> createTaskEventList(int numTaskEvents) {
+    // this static method creates a TaskEventList, originally called by Tab1.java
+    //      now it is called by MainActivity
+    public static ArrayList<TaskEvent> createDemoTaskEventList(int numTaskEvents) {
         ArrayList<TaskEvent> taskEvents = new ArrayList<TaskEvent>();
 
         // array to populate the created TaskEventList with actual task titles
@@ -61,7 +62,7 @@ public class TaskEvent {
 
     /* TODO: 2019-05-01
     *   I guess next would be to make the data save/persist (whether that's SQLite, I don't know)
-    *       and then only run the above createTaskEventList() if it doesn't exist to be loaded.
+    *       and then only run the above createDemoTaskEventList() if it doesn't exist to be loaded.
     * */
 
 }
