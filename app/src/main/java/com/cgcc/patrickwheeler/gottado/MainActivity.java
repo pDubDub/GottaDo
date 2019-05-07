@@ -25,6 +25,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import java.lang.Object;
+import java.lang.String;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     //  see SQLite DB powerpoint
     // TODO may need SavePreferences in order to save in-progress actions during onPause and onResume
 
-    // the main ArrayList of TaskEvents
+    // the main ArrayList of TaskEvents, should be easily accessible to sub fragments
     static ArrayList<TaskEvent> taskEvents;
 
     @Override
@@ -63,22 +66,35 @@ public class MainActivity extends AppCompatActivity {
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
 
+                // this call to saveData only really exists so that I can trigger it deliberately
+                // and prove that it works - PW
+                saveData();         // temp for testing saveData behavior
+
                 // launches a new Activity page, where user can create a new Task
                 startActivity(new Intent(getApplicationContext(), AddTaskActivity.class));
 
             }
         });
 
-        // I think we need to loadData here...
-        loadData();
+        // LOAD PRE-EXISTING DATA:
+        // For some reason, my logic needs this dummy item in order to work - PW
+        taskEvents = TaskEvent.createDemoTaskEventList(1);
 
-        taskEvents = TaskEvent.createDemoTaskEventList(8); // TODO DELETE THIS LINE ONCE SAVE/LOAD WORK
+        // loads saved data from internal storage...
+        loadData();
 
         // and then if-and-only-if ArrayList.size() == 0 after loading data, then create demoData
         // calls the static class method to create and populate the demonstration taskEvents list
         if (taskEvents.size() < 1) {
-            taskEvents = TaskEvent.createDemoTaskEventList(8);
+            taskEvents = TaskEvent.createDemoTaskEventList(8);          // don't set higher than 8
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        saveData();
     }
 
     // this method should allow any fragment or secondary activity to set the ArrayList
@@ -94,11 +110,30 @@ public class MainActivity extends AppCompatActivity {
     public void saveData() {
         // writing data to internal storage
         // this code taken from class PowerPoint
+        String outputString = "";
+
+        for (TaskEvent task:taskEvents) {
+            outputString = outputString.concat(task.getTaskEventName() + "," +
+                    task.isComplete() + "," +
+                    task.doItToday + "," +
+                    task.doesRepeat + "," +
+                    task.hasTimeReminder + "," +
+                    task.hasMapReminder + ",");
+        }
+
+        // Toast command only here to see the outputString created for saving
+         Toast.makeText(getApplicationContext(), outputString, Toast.LENGTH_LONG).show();
+
         try {
             FileOutputStream fileOutputStream = openFileOutput("DemoFile", Context.MODE_PRIVATE);
-            fileOutputStream.write("This is Data that is stored in the internal storage".getBytes());
+            fileOutputStream.write(outputString.getBytes());
+            // old line before outputString variable implemented:
+            // fileOutputStream.write("This is Data that is stored in the internal storage".getBytes());
             fileOutputStream.flush();
             fileOutputStream.close();
+
+            // temp
+            Toast.makeText(getApplicationContext(), "data saved", Toast.LENGTH_SHORT).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -116,12 +151,35 @@ public class MainActivity extends AppCompatActivity {
         // this code taken from class PowerPoint
         try {
             int ch;
-            StringBuilder builder = new StringBuilder();
+            StringBuilder inputString = new StringBuilder();
             FileInputStream fileInputStream = openFileInput("DemoFile");
             while ((ch = fileInputStream.read()) != -1) {
-                builder.append((char) ch);
+                inputString.append((char) ch);
             }
-            Toast.makeText(getApplicationContext(), ""+ch, Toast.LENGTH_LONG).show();
+
+            // TEMP prints resulting string from loading data
+             Toast.makeText(getApplicationContext(), "Data Read = " + inputString, Toast.LENGTH_LONG).show();
+
+            // TODO split inputString into tokens and populate taskEvents ArrayList (probably need to erase contents first)
+            taskEvents.clear();
+
+            String[] tokens = inputString.toString().split(",");
+            int numberOfTasks = tokens.length / 6;                      // divided by the number of fields
+            for (int i = 0 ; i < numberOfTasks; i++) {
+                // create a TaskEvent
+                TaskEvent aTask = new TaskEvent(tokens[6 * i]);
+
+                // set its fields
+                aTask.setComplete(Boolean.parseBoolean(tokens[6 * i + 1]));
+                aTask.doItToday = Boolean.parseBoolean(tokens[6 * 1 + 2]);
+                aTask.doesRepeat = Boolean.parseBoolean(tokens[6 * 1 + 3]);
+                aTask.hasTimeReminder = Boolean.parseBoolean(tokens[6 * 1 + 4]);
+                aTask.hasMapReminder = Boolean.parseBoolean(tokens[6 * 1 + 5]);
+
+                // add it to taskEvents ArrayList
+                taskEvents.add(aTask);
+            }
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

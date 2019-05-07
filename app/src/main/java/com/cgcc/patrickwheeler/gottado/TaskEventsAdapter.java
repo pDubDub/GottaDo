@@ -165,9 +165,26 @@ public class TaskEventsAdapter extends RecyclerView.Adapter<TaskEventsAdapter.Vi
 
         // TextView and Button from tutorial replaced with CheckBox
         CheckBox checkBox = viewHolder.checkBox;
+        ImageView timeImageView = viewHolder.timeImageView;
+        ImageView mapImageView = viewHolder.mapImageView;
+
         // checkBox.setChecked(!taskEvent.isComplete());
         checkBox.setText(taskEvent.getTaskEventName());
         checkBox.setTextColor(taskEvent.isComplete() ? Color.LTGRAY : Color.BLACK);
+        checkBox.setChecked(taskEvent.isComplete() ? true : false);
+
+
+        if ((taskEvent.hasTimeReminder)) {
+            timeImageView.setImageResource(R.drawable.time_icon_on);
+        } else {
+            timeImageView.setImageResource(R.drawable.time_icon_off);
+        }
+
+        if (taskEvent.hasMapReminder) {
+            mapImageView.setImageResource(R.drawable.map_icon_on);
+        } else {
+            mapImageView.setImageResource(R.drawable.map_icon_off);
+        }
 
         // NOTE: the UI checkbox behavior works, but it doesn't actually changed boolean of TaskEvent
     }
