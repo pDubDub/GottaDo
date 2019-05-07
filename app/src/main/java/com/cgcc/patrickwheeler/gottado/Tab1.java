@@ -31,7 +31,9 @@ public class Tab1 extends Fragment {
         rvTaskEvents.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         // Initialize contacts
-        taskEvents = TaskEvent.createTaskEventList(20);
+        // taskEvents = TaskEvent.createDemoTaskEventList(8);
+
+        taskEvents =((MainActivity)getContext()).getTaskEvents();
 
         // Create adapter passing in the sample user data
         TaskEventsAdapter adapter = new TaskEventsAdapter(taskEvents);
