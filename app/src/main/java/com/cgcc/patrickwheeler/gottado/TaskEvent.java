@@ -7,20 +7,27 @@ public class TaskEvent {
     // fields, properties, whatever you wanna call 'em
     private String mTaskEventName;
     private boolean mIsCompleted;
-    private boolean doItToday;
+    public boolean doItToday;
     // startDate
     // startTime
+    public boolean doesRepeat;
     // deadline
     // duration
+    public boolean hasTimeReminder;
     // reminderTime
+    public boolean hasMapReminder;
     // reminderLocation
     // UniqueID             ??
     // SortOrder#
     // do we need an IsEvent boolean, to distinguish calendar events from tasks? (both are TaskEvent objects)
 
-    public TaskEvent(String taskEventName, boolean isComplete) {
+    public TaskEvent(String taskEventName) {
         mTaskEventName = taskEventName;
-        mIsCompleted = isComplete;
+        mIsCompleted = false;
+        doItToday = false;
+        doesRepeat = false;
+        hasTimeReminder = false;
+        hasMapReminder = false;
     }
 
     public String getTaskEventName() {
@@ -30,14 +37,23 @@ public class TaskEvent {
     public boolean isComplete() {
         return mIsCompleted;
     }
+    public void setComplete(Boolean value) { mIsCompleted = value; }
 
     private static int taskEventID = 0;
 
-    public static ArrayList<TaskEvent> createTaskEventList(int numTaskEvents) {
+    // this static method creates a TaskEventList, originally called by Tab1.java
+    //      now it is called by MainActivity
+    public static ArrayList<TaskEvent> createDemoTaskEventList(int numTaskEvents) {
         ArrayList<TaskEvent> taskEvents = new ArrayList<TaskEvent>();
 
+        // array to populate the created TaskEventList with actual task titles
+        String[] nameArray = {"Feed Cat", "Turn in Final Project", "Visit Advisor",
+                "Drop off mail", "Buy Cat Food", "Get Milk",
+                "Call Mom", "Pay Phone Bill"};
+
         for (int i = 1; i <= numTaskEvents; i++) {
-            taskEvents.add(new TaskEvent("TaskEvent " + ++taskEventID, i <= numTaskEvents / 2));
+
+            taskEvents.add(new TaskEvent(nameArray[i-1]));
             // above line sets first half of taskEvents boolean differently
         }
 
@@ -46,7 +62,7 @@ public class TaskEvent {
 
     /* TODO: 2019-05-01
     *   I guess next would be to make the data save/persist (whether that's SQLite, I don't know)
-    *       and then only run the above createTaskEventList() if it doesn't exist to be loaded.
+    *       and then only run the above createDemoTaskEventList() if it doesn't exist to be loaded.
     * */
 
 }

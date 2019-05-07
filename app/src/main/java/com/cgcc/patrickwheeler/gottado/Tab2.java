@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+// This fragment will container the UI for the Scheduler tab of the app
+
+
 public class Tab2 extends Fragment {
 
     @Nullable
