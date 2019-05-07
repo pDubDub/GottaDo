@@ -78,16 +78,18 @@ public class MainActivity extends AppCompatActivity {
 
         // LOAD PRE-EXISTING DATA:
         // For some reason, my logic needs this dummy item in order to work - PW
-        taskEvents = TaskEvent.createDemoTaskEventList(1);
+        //      For the time being, lets just load sample data by default.
+        //      If saved data exists, it will proceed to blow out sample data.
+        taskEvents = TaskEvent.createDemoTaskEventList(8);
 
         // loads saved data from internal storage...
         loadData();
 
         // and then if-and-only-if ArrayList.size() == 0 after loading data, then create demoData
         // calls the static class method to create and populate the demonstration taskEvents list
-        if (taskEvents.size() < 1) {
-            taskEvents = TaskEvent.createDemoTaskEventList(8);          // don't set higher than 8
-        }
+//        if (taskEvents.size() < 1) {
+//            taskEvents = TaskEvent.createDemoTaskEventList(8);          // don't set higher than 8
+//        }
     }
 
     @Override
@@ -122,10 +124,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Toast command only here to see the outputString created for saving
-         Toast.makeText(getApplicationContext(), outputString, Toast.LENGTH_LONG).show();
+        // Toast.makeText(getApplicationContext(), outputString, Toast.LENGTH_LONG).show();
 
         try {
-            FileOutputStream fileOutputStream = openFileOutput("DemoFile", Context.MODE_PRIVATE);
+            FileOutputStream fileOutputStream = openFileOutput("GottaDoDataFile", Context.MODE_PRIVATE);
             fileOutputStream.write(outputString.getBytes());
             // old line before outputString variable implemented:
             // fileOutputStream.write("This is Data that is stored in the internal storage".getBytes());
@@ -152,19 +154,20 @@ public class MainActivity extends AppCompatActivity {
         try {
             int ch;
             StringBuilder inputString = new StringBuilder();
-            FileInputStream fileInputStream = openFileInput("DemoFile");
+            FileInputStream fileInputStream = openFileInput("GottaDoDataFile");
             while ((ch = fileInputStream.read()) != -1) {
                 inputString.append((char) ch);
             }
 
             // TEMP prints resulting string from loading data
-             Toast.makeText(getApplicationContext(), "Data Read = " + inputString, Toast.LENGTH_LONG).show();
+            // Toast.makeText(getApplicationContext(), "Data Read = " + inputString, Toast.LENGTH_LONG).show();
 
             // TODO split inputString into tokens and populate taskEvents ArrayList (probably need to erase contents first)
             taskEvents.clear();
 
             String[] tokens = inputString.toString().split(",");
             int numberOfTasks = tokens.length / 6;                      // divided by the number of fields
+
             for (int i = 0 ; i < numberOfTasks; i++) {
                 // create a TaskEvent
                 TaskEvent aTask = new TaskEvent(tokens[6 * i]);
@@ -182,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "No saved data. Demo data loaded.", Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             e.printStackTrace();
         }
