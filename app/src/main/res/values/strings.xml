@@ -6,4 +6,12 @@
     <!-- TODO: Remove or change this placeholder text -->
     <!--  I don't think this is actually used for anything anymore -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="addView_text_1">This activity allows you to add a new item to the list, or edit an existing task.</string>
+    <string name="addView_input_hint">Enter Task To-Do...</string>
+    <string name="addView_text2">Users can also define time-based and geo-location based reminders.</string>
+    <string name="addView_todaySwtichLabel">Do It Today</string>
+    <string name="addView_repeatSwitchLabel">Repeat</string>
+    <string name="addView_timeSwitchLabel">Time Reminder</string>
+    <string name="addView_mapSwitchLabel">Location Reminder</string>
+    <string name="addView_saveButtonLabel">Save</string>
 </resources>
