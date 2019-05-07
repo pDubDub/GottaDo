@@ -3,7 +3,7 @@
 // authors Tanner Kay & Patrick Wheeler
 
 // Main Activity creates the initial tab layout and the Add button at the bottom of the screen.
-// just a tiny change plus a smaller change.
+
 
 package com.cgcc.patrickwheeler.gottado;
 
