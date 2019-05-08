@@ -26,25 +26,25 @@ import android.widget.ListView;
 
 public class Tab2 extends Fragment {
 
-    private static String[] staticListViewArray = {
-            "Morning Task","9AM - Coffee Meeting","Another task","Task",
-            "Meet Advisor : On Campus, Before Class","12PM - CIS 162 AD, on Campus","A task on campus",
-            "Return Home","Feed Cat 2"};
-
-    public static Tab2 newInstance() {
-        Bundle args = new Bundle();
-        Tab2 fragment = new Tab2();
-        fragment.setArguments(args);
-        return fragment;
-    }
+//    private static String[] staticListViewArray = {
+//            "Morning Task","9AM - Coffee Meeting","Another task","Task",
+//            "Meet Advisor : On Campus, Before Class","12PM - CIS 162 AD, on Campus","A task on campus",
+//            "Return Home","Feed Cat 2"};
+//
+//    public static Tab2 newInstance() {
+//        Bundle args = new Bundle();
+//        Tab2 fragment = new Tab2();
+//        fragment.setArguments(args);
+//        return fragment;
+//    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View mainView = inflater.inflate(R.layout.tab2list2, container, false);
-        ListView listView = (ListView) mainView.findViewById(R.id.tab2listView);
-
-        listView.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, staticListViewArray));
+        View mainView = inflater.inflate(R.layout.tab2fake, container, false);
+//        ListView listView = (ListView) mainView.findViewById(R.id.tab2listView);
+//
+//        listView.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, staticListViewArray));
         return mainView;
     }
 }
