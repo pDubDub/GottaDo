@@ -39,12 +39,6 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    // TODO need to implement Local Storage to load/save ArrayList
-    //          ArrayList to Local Storage
-    //          - Load when opening/launching
-    //          - if does not exists then create sampleData
-    //          - Save on all edits
-    //  see SQLite DB powerpoint
     // TODO may need SavePreferences in order to save in-progress actions during onPause and onResume
 
     // the main ArrayList of TaskEvents, should be easily accessible to sub fragments
@@ -79,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         tabs.setupWithViewPager(viewPager);
 
         // floating action button
-        // will eventually allow user to add items to the To-Do list
+        //       allows user to add items to the To-Do list
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,9 +91,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
-        // and then if-and-only-if ArrayList.size() == 0 after loading data, then create demoData
+        // Old location of loadData() call
+        // idea was to have it loadData(), then if no data loaded, it would call this createDemoTaskEventList() method
+        //
+        // if-and-only-if ArrayList.size() == 0 after loading data, then create demoData
         // calls the static class method to create and populate the demonstration taskEvents list
 //        if (taskEvents.size() < 1) {
 //            taskEvents = TaskEvent.createDemoTaskEventList(8);          // don't set higher than 8
@@ -111,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
         Calendar calendar = Calendar.getInstance();
         weekDay = dayFormat.format(calendar.getTime());
-        titleTextView.setText("GottaDo            ..." + weekDay + "!");
+        titleTextView.setText("GottaDo          ..." + weekDay + "!");
     }
 
     @Override
@@ -119,6 +114,13 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
 
         saveData();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+
+        loadData();
     }
 
     // this method should allow any fragment or secondary activity to set the ArrayList
@@ -157,17 +159,16 @@ public class MainActivity extends AppCompatActivity {
             fileOutputStream.close();
 
             // temp
-            Toast.makeText(getApplicationContext(), "data saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "GottaDo data saved", Toast.LENGTH_SHORT).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        // TODO should modify the above code, to tokenize taskEvents and write to file
-        int i = taskEvents.size();              // just a line to prove to myself that this method has access to taskEvents
+        // int i = taskEvents.size();              // just a line to prove to myself that this method has access to taskEvents
 
-        // TODO once working, saveData() should be called at all of the onPause, etc events
+        // once working, saveData() should be called at all of the onPause, etc events
     }
 
     public void loadData() {
@@ -184,9 +185,10 @@ public class MainActivity extends AppCompatActivity {
             // TEMP prints resulting string from loading data
             // Toast.makeText(getApplicationContext(), "Data Read = " + inputString, Toast.LENGTH_LONG).show();
 
-            // TODO split inputString into tokens and populate taskEvents ArrayList (probably need to erase contents first)
+            // erase taskEvents ArrayList contents first before loading
             taskEvents.clear();
 
+            // split inputString into tokens and populate taskEvents ArrayList
             String[] tokens = inputString.toString().split(",");
             int numberOfTasks = tokens.length / 6;                      // divided by the number of fields
 
@@ -205,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
                 taskEvents.add(aTask);
             }
 
-            Toast.makeText(getApplicationContext(), "Stored data loaded!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Stored GottaDo data loaded!", Toast.LENGTH_LONG).show();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -214,11 +216,8 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
-        // taskEvents = TaskEvent.createDemoTaskEventList(1); // TEMP LINE until loadData() works
-
-        // TODO once saveData method works, should modify this code to empty ArrayList, read file, de-tokenize, create taskEvents, and add to ArrayList
-
-        // TODO once working, loadData() should be called at onCreate, onResume, etc ????
+        // once working, loadData() should be called at onCreate, onResume, etc
     }
+
+    // Tried implementing basic optionsMenu but it is apparently not compatible with current Tabbed Activity
 }

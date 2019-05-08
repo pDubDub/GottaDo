@@ -116,13 +116,11 @@ public class TaskEventsAdapter extends RecyclerView.Adapter<TaskEventsAdapter.Vi
 
                     // launch AddTaskActivity here
 
-
                     // not sure how to do it. The following code does not compile:
 //                    Intent intent = new Intent(view.getContext(), StartActivity.AddTaskActivity);
 //                    view.getContext().startActivity(intent);
 //                    MainActivity.startActivity(new Intent(MainActivity.getApplicationContext(), AddTaskActivity.class));
                 }
-
             }
         }
     }
@@ -194,13 +192,11 @@ public class TaskEventsAdapter extends RecyclerView.Adapter<TaskEventsAdapter.Vi
             repeatImageView.setImageResource(R.drawable.repeat_icon_off);
         }
 
-        // tried doing this via get/set methods instead, still doesn't work.
         if(taskEvent.doingItToday()) {
             todayImageView.setImageResource(R.drawable.today_icon_on);
         }else {
             todayImageView.setImageResource(R.drawable.today_icon_off);
         }
-        // NOTE: the UI checkbox behavior works, but it doesn't actually changed boolean of TaskEvent
     }
 
     // Returns the total count of items in the list
