@@ -102,7 +102,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle((nameInputEditText.getText().toString().isEmpty()) ? "Sample DO SOMETHING" : nameInputEditText.getText().toString() );
-        builder.setMessage("You asked to be reminded to " + ((nameInputEditText.getText().toString().isEmpty()) ? "DO SOMETHING" : nameInputEditText.getText().toString() ) + " at when you arrived SOMEPLACE");
+        builder.setMessage("You asked to be reminded to " + ((nameInputEditText.getText().toString().isEmpty()) ? "DO SOMETHING" : nameInputEditText.getText().toString() ) + " when you arrived SOMEPLACE");
         builder.setPositiveButton("Done!", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
