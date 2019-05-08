@@ -167,7 +167,7 @@ public class TaskEventsAdapter extends RecyclerView.Adapter<TaskEventsAdapter.Vi
         CheckBox checkBox = viewHolder.checkBox;
         ImageView timeImageView = viewHolder.timeImageView;
         ImageView mapImageView = viewHolder.mapImageView;
-
+        ImageView repeatImageView = viewHolder.repeatImageView;
         ImageView todayImageView = viewHolder.todayImageView;
 
         // checkBox.setChecked(!taskEvent.isComplete());
@@ -186,6 +186,12 @@ public class TaskEventsAdapter extends RecyclerView.Adapter<TaskEventsAdapter.Vi
             mapImageView.setImageResource(R.drawable.map_icon_on);
         } else {
             mapImageView.setImageResource(R.drawable.map_icon_off);
+        }
+
+        if (taskEvent.doesRepeat) {
+            repeatImageView.setImageResource(R.drawable.repeat_icon_on);
+        } else {
+            repeatImageView.setImageResource(R.drawable.repeat_icon_off);
         }
 
         // tried doing this via get/set methods instead, still doesn't work.

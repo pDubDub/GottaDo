@@ -58,6 +58,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // LOAD PRE-EXISTING DATA:
+        // For some reason, my logic needs this dummy item in order to work - PW
+        //      For the time being, lets just load sample data by default.
+        //      If saved data exists, it will proceed to blow out sample data.
+        taskEvents = TaskEvent.createDemoTaskEventList(8);
+
+        // loads saved data from internal storage...
+        loadData();
+
         TextView titleTextView = (TextView) findViewById(R.id.title);
 
         FragmentManager fm = getSupportFragmentManager();
@@ -88,14 +97,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // LOAD PRE-EXISTING DATA:
-        // For some reason, my logic needs this dummy item in order to work - PW
-        //      For the time being, lets just load sample data by default.
-        //      If saved data exists, it will proceed to blow out sample data.
-        taskEvents = TaskEvent.createDemoTaskEventList(8);
 
-        // loads saved data from internal storage...
-        loadData();
 
         // and then if-and-only-if ArrayList.size() == 0 after loading data, then create demoData
         // calls the static class method to create and populate the demonstration taskEvents list
@@ -194,14 +196,16 @@ public class MainActivity extends AppCompatActivity {
 
                 // set its fields
                 aTask.setComplete(Boolean.parseBoolean(tokens[6 * i + 1]));
-                aTask.doItToday = Boolean.parseBoolean(tokens[6 * 1 + 2]);
-                aTask.doesRepeat = Boolean.parseBoolean(tokens[6 * 1 + 3]);
-                aTask.hasTimeReminder = Boolean.parseBoolean(tokens[6 * 1 + 4]);
-                aTask.hasMapReminder = Boolean.parseBoolean(tokens[6 * 1 + 5]);
+                aTask.doItToday = Boolean.parseBoolean(tokens[6 * i + 2]);
+                aTask.doesRepeat = Boolean.parseBoolean(tokens[6 * i + 3]);
+                aTask.hasTimeReminder = Boolean.parseBoolean(tokens[6 * i + 4]);
+                aTask.hasMapReminder = Boolean.parseBoolean(tokens[6 * i + 5]);
 
                 // add it to taskEvents ArrayList
                 taskEvents.add(aTask);
             }
+
+            Toast.makeText(getApplicationContext(), "Stored data loaded!", Toast.LENGTH_LONG).show();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
