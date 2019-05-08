@@ -2,12 +2,15 @@ package com.cgcc.patrickwheeler.gottado;
 
 import java.util.ArrayList;
 
+// TaskEvent class is used for To-Do tasks in GottaDo.
+// Additionally, GottaDo would eventually import events from the phone's calendar app, hence TaskEvent.
+
 public class TaskEvent {
 
     // fields, properties, whatever you wanna call 'em
     private String mTaskEventName;
     private boolean mIsCompleted;
-    public boolean doItToday;
+    public boolean doItToday;                   // TaskEvents marked Today would float to top of lists.
     // startDate
     // startTime
     public boolean doesRepeat;
@@ -38,6 +41,9 @@ public class TaskEvent {
         return mIsCompleted;
     }
     public void setComplete(Boolean value) { mIsCompleted = value; }
+
+    public boolean doingItToday() { return doItToday; }
+    public void setDoItToday(Boolean value) { doItToday = value; }
 
     private static int taskEventID = 0;
 

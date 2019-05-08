@@ -168,6 +168,8 @@ public class TaskEventsAdapter extends RecyclerView.Adapter<TaskEventsAdapter.Vi
         ImageView timeImageView = viewHolder.timeImageView;
         ImageView mapImageView = viewHolder.mapImageView;
 
+        ImageView todayImageView = viewHolder.todayImageView;
+
         // checkBox.setChecked(!taskEvent.isComplete());
         checkBox.setText(taskEvent.getTaskEventName());
         checkBox.setTextColor(taskEvent.isComplete() ? Color.LTGRAY : Color.BLACK);
@@ -186,6 +188,12 @@ public class TaskEventsAdapter extends RecyclerView.Adapter<TaskEventsAdapter.Vi
             mapImageView.setImageResource(R.drawable.map_icon_off);
         }
 
+        // tried doing this via get/set methods instead, still doesn't work.
+        if(taskEvent.doingItToday()) {
+            todayImageView.setImageResource(R.drawable.today_icon_on);
+        }else {
+            todayImageView.setImageResource(R.drawable.today_icon_off);
+        }
         // NOTE: the UI checkbox behavior works, but it doesn't actually changed boolean of TaskEvent
     }
 
