@@ -7,19 +7,39 @@
 
 package com.cgcc.patrickwheeler.gottado;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.design.widget.Snackbar;
 
+import android.util.Log;
 import android.view.View;
+import android.view.Gravity;
+
 import android.widget.TextView;
 import android.widget.Toast;
+
+//import com.google.android.gms.maps.CameraUpdateFactory;       says "gms" not resolved
+//import com.google.android.gms.maps.GoogleMap;
+//import com.google.android.gms.maps.OnMapReadyCallback;
+//import com.google.android.gms.maps.SupportMapFragment;
+//import com.google.android.gms.maps.model.LatLng;
+//import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.w3c.dom.Text;
 
@@ -35,6 +55,7 @@ import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,6 +67,24 @@ public class MainActivity extends AppCompatActivity {
 
     String weekDay;
 
+    // attempted to get location data, but could not get to work.
+
+//    LocationManager locationManager;
+//    LocationListener locationListener;
+//
+//    // code from instructor sample
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//
+//        if (requestCode == 1) {
+//            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+//                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+//                }
+//            }
+//        }
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +96,9 @@ public class MainActivity extends AppCompatActivity {
         //      For the time being, lets just load sample data by default.
         //      If saved data exists, it will proceed to blow out sample data.
         taskEvents = TaskEvent.createDemoTaskEventList(8);
+
+        // Tried to get location awareness to work, but was getting an unresolved identifier error in import statements
+        // loadGeoLocation();
 
         // loads saved data from internal storage...
         loadData();
@@ -116,12 +158,13 @@ public class MainActivity extends AppCompatActivity {
         saveData();
     }
 
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-
-        loadData();
-    }
+    // Thought this would be useful to make it reload/refresh data, but instead it was preventing AddTaskActivity from actually adding to the ArrayList.
+//    @Override
+//    protected void onPostResume() {
+//        super.onPostResume();
+//
+//        loadData();
+//    }
 
     // this method should allow any fragment or secondary activity to set the ArrayList
     public static void setTaskEvents(ArrayList<TaskEvent> taskEvents) {
@@ -218,6 +261,50 @@ public class MainActivity extends AppCompatActivity {
 
         // once working, loadData() should be called at onCreate, onResume, etc
     }
+
+//    Tried to get location awareness to work, but was getting an unresolved identifier error in the import statements
+
+//    public void loadGeoLocation() {
+//
+//        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+//        locationListener = new LocationListener() {
+//            @Override
+//            public void onLocationChanged(Location location) {
+//                LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
+//                mMap.addMarker(new MarkerOptions().position(userLocation).title("Your Location"));
+//                mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
+//
+//                Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+//
+//                try {
+//                    List<Address> listAddresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+//
+//                    if (listAddresses != null && ((List) listAddresses).size() > 0) {
+//                        String address = "";
+//
+//                        if (listAddresses.get(0).getThoroughfare() != null) {
+//                            address += listAddresses.get(0).getPostalCode() + " ";
+//                        }
+//
+//                        if (listAddresses.get(0).getAdminArea() != null) {
+//                            address += listAddresses.get(0).getAdminArea();
+//                        }
+//
+//                        Toast.makeText(MapsActivity.this, address, Toast.LENGTH_LONG).show();
+//                        Log.i("Address", address);
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//
+//            Toast geoToast = Toast.makeText(getApplicationContext(),"Geolocation Message", Toast.LENGTH_LONG);
+//        geoToast.setGravity(Gravity.CENTER | Gravity.BOTTOM, 0, 250);
+//        geoToast.show();
+//
+//    }
+
 
     // Tried implementing basic optionsMenu but it is apparently not compatible with current Tabbed Activity
 }
